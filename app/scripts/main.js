@@ -87,6 +87,7 @@ var timer = {
     	tapTempo.clearTimes();
 			$('.mdl-layout__content').removeClass('animate-calculate');
 			$('.mdl-layout__content').addClass('animate-reset');
+			$('#reset-message').removeClass('show');
 			$('#bpm').text('---');
     }, 3000);
   },
@@ -116,6 +117,7 @@ function updateView() {
 	if(tapTempo.taps.length > 2) {
 		var bpm = Math.round(tapTempo.getBpm());
 		$('#bpm').text(bpm);
+		$('#reset-message p ').text('please wait 3 seconds to reset');
 	}
 	else if(tapTempo.taps.length == 0) {
 		$('#bpm').text('---');
@@ -123,10 +125,12 @@ function updateView() {
 	else if(tapTempo.taps.length == 1) {
 		$('.mdl-layout__content').removeClass('animate-reset');
 		$('.mdl-layout__content').addClass('animate-calculate');
+		$('#reset-message p').text('tap again');
+		$('#reset-message').addClass('show');
 	}
-	// else {
-	// 	$('#bpm').text('tap again');
-	// }
+	else {
+		$('#reset-message p').text('tap once more');
+	}
 }
 
 function visualizeTap() {
