@@ -112,8 +112,9 @@ gulp.task('scripts', () =>
       //       you need to explicitly list your scripts here in the right order
       //       to be correctly concatenated
       './app/scripts/jquery-2.1.3.min.js',
-      './app/scripts/main.js',
-      './app/scripts/BufferLoader.js'
+      './app/scripts/BufferLoader.js',
+      './app/scripts/metro.js',
+      './app/scripts/main.js'
     ])
       .pipe($.newer('.tmp/scripts'))
       .pipe($.sourcemaps.init())
