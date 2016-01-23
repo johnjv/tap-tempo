@@ -1,6 +1,6 @@
 /*!
  *
- *  justinvarghesejohn.com
+ *  Tap Tempo
  *  Copyright 2015 Justin Varghese John
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -67,16 +67,6 @@ gulp.task('copy', () =>
     dot: true
   }).pipe(gulp.dest('dist'))
     .pipe($.size({title: 'copy'}))
-);
-
-// Copy all audio files in the audio folder
-gulp.task('copy', () =>
-  gulp.src([
-    'app/audio/*'
-  ], {
-    base: 'app'
-  }).pipe(gulp.dest('dist'))
-    .pipe($.size({title: 'audio'}))
 );
 
 // Compile and automatically prefix stylesheets
