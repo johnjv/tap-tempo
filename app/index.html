@@ -31,23 +31,27 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
         <!-- Top row, always visible -->
-        <div class="mdl-layout__header-row">
+        <div style="padding:0 16px 0 32px;" class="mdl-layout__header-row">
           <!-- Title -->
           <h1><span class="mdl-layout-title">Tap Tempo</span></h1>
         </div>
         <!-- Bottom row, not visible on scroll -->
       </header>
       <main class="mdl-layout__content">
+        <!-- <button style="position: absolute;bottom: 18px;right: 18px;" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+          <i class="material-icons">add</i>
+        </button> -->
         <div style="flex-direction:column;" class="mdl-grid">
-          <div style="margin:6px auto 0px;text-align:center;" class="mdl-cell">
-            <p id="bpm" class="mdl-typography--display-2">---</p>
+          <div style="margin:24px auto 0px;text-align:center;" class="mdl-cell">
+            <p style="margin-bottom:0px;" id="bpm" class="mdl-typography--display-2">---</p>
             <p>BPM</p>
           </div>
-          <button style="margin-top:0.5em;" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored tapper">
+          <button style="margin:0 auto;margin-top:0.5em;border-radius: 60px;border: 2px dashed #4A148C;" class="mdl-button mdl-js-button mdl-js-ripple-effect tapper">
             <span>tap here</span>
           </button>
-          <div style="margin:0 auto;padding-top:2em;" class="g--half g--centered">
-            <p>please wait 3 seconds to reset</p>
+
+          <div id="reset-message" style="margin:0 auto;padding-top:2em;">
+            <p></p>
           </div>
         </div>
       </main>
