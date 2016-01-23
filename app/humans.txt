@@ -1,0 +1,14 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+  Justin John -- Developer -- @qiaozhengyi
+
+# THANKS
+
+  You!
+
+# TECHNOLOGY COLOPHON
+
+  HTML5, CSS3, JS, WEB AUDIO API, CANVAS, WSK, MDL, NGINX
