@@ -21,14 +21,14 @@
 
 var a = new AudioContext() || new webkitAudioContext();
 var m = new Metro(a);
-console.dir(m);
 m.init();
 
-$('#fab').on('click', function() {
+document.getElementById('fab').addEventListener('click', function() {
+	let icon = document.querySelector('#fab i');
 	if(m.isPlaying) {
-		$('#fab i').text('play_arrow');
+		icon.textContent = 'play_arrow';
 	} else {
-		$('#fab i').text('pause');
+		icon.textContent = 'pause';
 	}
 	m.play();
 });
@@ -100,10 +100,10 @@ var timer = {
     this.timeoutID = window.setTimeout( function() {
     	self.stop();
     	tapTempo.clearTimes();
-			$('.mdl-layout__content').removeClass('animate-calculate');
-			$('.mdl-layout__content').addClass('animate-reset');
-			$('#reset-message').removeClass('show');
-			$('#bpm').text('---');
+			document.querySelector('.mdl-layout__content').classList.remove('animate-calculate');
+			document.querySelector('.mdl-layout__content').classList.add('animate-reset');
+			document.querySelector('#reset-message').classList.remove('show');
+			document.querySelector('#bpm').textContent = '---';
     }, 3000);
   },
 
@@ -132,20 +132,20 @@ function updateView() {
 	if(tapTempo.taps.length > 2) {
 		var bpm = Math.round(tapTempo.getBpm());
 		m.updateTempo(bpm);
-		$('#bpm').text(bpm);
-		$('#reset-message p ').text('to reset please wait 3 seconds');
+		document.querySelector('#bpm').textContent = bpm;
+		document.querySelector('#reset-message p ').textContent = 'to reset please wait 3 seconds';
 	}
 	else if(tapTempo.taps.length == 0) {
-		$('#bpm').text('---');
+		document.querySelector('#bpm').textContent = '---';
 	}
 	else if(tapTempo.taps.length == 1) {
-		$('.mdl-layout__content').removeClass('animate-reset');
-		$('.mdl-layout__content').addClass('animate-calculate');
-		$('#reset-message p').text('tap again');
-		$('#reset-message').addClass('show');
+		document.querySelector('.mdl-layout__content').classList.remove('animate-reset');
+		document.querySelector('.mdl-layout__content').classList.add('animate-calculate');
+		document.querySelector('#reset-message p').textContent = 'tap again';
+		document.querySelector('#reset-message').classList.add('show');
 	}
 	else {
-		$('#reset-message p').text('tap once more');
+		document.querySelector('#reset-message p').textContent = 'tap once more';
 	}
 }
 
