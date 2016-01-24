@@ -108,7 +108,7 @@ class Metro {
 
     init() {
       let self = this;
-      this.timerWorker = new Worker("scripts/metroworker.js");
+      this.timerWorker = new Worker("scripts/workers/metroworker.js");
 
       this.timerWorker.onmessage = function(event) {
           if (event.data == "tick") {
