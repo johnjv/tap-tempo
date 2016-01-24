@@ -61,8 +61,7 @@ gulp.task('images', () =>
 gulp.task('copy', () =>
   gulp.src([
     'app/*',
-    '!app/*.html',
-    'node_modules/apache-server-configs/dist/.htaccess'
+    '!app/*.html'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'))
@@ -127,6 +126,21 @@ gulp.task('scripts', () =>
       .pipe($.sourcemaps.write('.'))
       .pipe(gulp.dest('dist/scripts'))
 );
+
+// Transpile and minify JavaScript Web Workers.
+gulp.task('webworkers', () => {
+  gulp.src('app/scripts/workers/*.js')
+    .pipe($.newer('.tmp/scripts'))
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('.tmp/scripts'))
+    .pipe($.uglify({preserveComments: 'some'}))
+    // Output files
+    .pipe($.size({title: 'webworkers'}))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/scripts/workers'))
+});
 
 // Scan your HTML for assets & optimize them
 gulp.task('html', () => {
@@ -205,7 +219,7 @@ gulp.task('serve:dist', ['default'], () =>
 gulp.task('default', ['clean'], cb =>
   runSequence(
     'styles',
-    ['jshint', 'html', 'scripts', 'images', 'copy'],
+    ['jshint', 'html', 'scripts', 'webworkers', 'images', 'copy'],
     'generate-service-worker',
     cb
   )
