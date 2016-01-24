@@ -158,7 +158,12 @@ gulp.task('html', () => {
       // CSS Selectors for UnCSS to ignore
       ignore: [
         /.navdrawer-container.open/,
-        /.app-bar.open/
+        /.app-bar.open/,
+        /.mdl-layout__container/,
+        /.show/,
+        /.animate-reset/,
+        /.animate-calculate/,
+        /.mdl-ripple/
       ]
     })))
 
