@@ -78,11 +78,14 @@ function handleTap(event) {
 	updateView();
 }
 
+
+
 function updateView() {
 	if(tapTempo.taps.length > 2) {
 		var bpm = Math.round(tapTempo.getBpm());
 		m.updateTempo(bpm);
 		document.querySelector('#bpm').textContent = bpm;
+		document.querySelector('#bpm-time').textContent = bpm;
 		document.querySelector('#reset-message p ').textContent = 'to reset please wait 3 seconds';
 	}
 	else if(tapTempo.taps.length == 0) {
