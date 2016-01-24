@@ -50,3 +50,15 @@ body {
 #reset-message.show {
   opacity: 1;
 }
+
+.mdl-grid {
+  flex-direction: column;
+}
+
+@media screen and (orientation: landscape) {
+  .mdl-grid {
+    flex-direction: row-reverse;
+    align-items: center;
+    height: 80vh;
+  }
+}
