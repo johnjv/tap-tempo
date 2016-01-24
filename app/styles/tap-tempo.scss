@@ -55,10 +55,25 @@ body {
   flex-direction: column;
 }
 
+#metro-message {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  top: initial;
+  right: initial;
+}
+
 @media screen and (orientation: landscape) {
   .mdl-grid {
     flex-direction: row-reverse;
     align-items: center;
     height: 80vh;
+  }
+
+  #metro-message {
+    top: 78px;
+    right: 18px;
+    left: initial;
+    bottom: initial;
   }
 }
