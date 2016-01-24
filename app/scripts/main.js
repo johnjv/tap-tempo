@@ -1,7 +1,7 @@
 /*!
  *
  *  Tap Tempo
- *  Copyright 2015 Justin Varghese John
+ *  Copyright 2016 Justin Varghese John
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
 
 'use strict';
 
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var a = new AudioContext() || new webkitAudioContext();
 var m = new Metro(a);
 m.init();
