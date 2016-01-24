@@ -110,8 +110,8 @@ gulp.task('scripts', () =>
       // Note: Since we are not using useref in the scripts build pipeline,
       //       you need to explicitly list your scripts here in the right order
       //       to be correctly concatenated
-      './app/scripts/BufferLoader.js',
       './app/scripts/metro.js',
+      './app/scripts/TapTempo.js',
       './app/scripts/main.js'
     ])
       .pipe($.newer('.tmp/scripts'))
