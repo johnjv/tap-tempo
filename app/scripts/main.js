@@ -21,7 +21,7 @@
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var a = new AudioContext() || new webkitAudioContext();
-var m = new Metro(a);
+var m = new Metronome(a);
 m.init();
 
 document.getElementById('fab').addEventListener('click', function() {

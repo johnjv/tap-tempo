@@ -1,7 +1,7 @@
 /*!
  *
  *  Tap Tempo
- *  Copyright 2015 Justin Varghese John
+ *  Copyright 2016 Justin Varghese John
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,27 +19,19 @@
 
 'use strict';
 
-class Metro {
+class Metronome {
 
     constructor(audioContext) {
         this.audioContext = audioContext;
         this.isPlaying = false;
-
-        this.startTime; // start time of entire sequence
-
         this.tempo = 120; // TODO: allow for this to be overriden
-
         this.lookahead = 25.0;
-
-        this.current16thNote; // What note is currently last scheduled?
-
+        this.current16thNote = 0; // What note is currently last scheduled?
         this.scheduleAheadTime = 0.1;
         this.nextNoteTime = 0.0;
         this.noteResolution = 0;
         this.noteLength = 0.05;
-
         this.notesInQueue = [];
-
         this.timerWorker = null;
     }
 
@@ -51,7 +43,7 @@ class Metro {
       let secondsPerBeat = 60.0 / this.tempo;
       this.nextNoteTime += 0.25 * secondsPerBeat;
       this.current16thNote++;    // Advance the beat number, wrap to zero
-      if (this.current16thNote == 16) {
+      if (this.current16thNote === 16) {
           this.current16thNote = 0;
       }
     }
@@ -62,23 +54,27 @@ class Metro {
       // push the note on the queue, even if we're not playing.
       this.notesInQueue.push( { note: beatNumber, time: time } );
 
-      if ( (this.noteResolution==1) && (beatNumber%2))
-          return; // we're not playing non-8th 16th notes
-      if ( (this.noteResolution==2) && (beatNumber%4))
-          return; // we're not playing non-quarter 8th notes
-      if( (beatNumber%4 != 0))
-          return;
+      if ( (this.noteResolution === 1) && (beatNumber%2)) {
+        return; // we're not playing non-8th 16th notes
+      }
+      if ( (this.noteResolution === 2) && (beatNumber%4)) {
+        return; // we're not playing non-quarter 8th notes
+      }
+      if( (beatNumber%4 !== 0)) {
+        return;
+      }
 
       // create an oscillator
       let osc = this.audioContext.createOscillator();
       osc.connect( this.audioContext.destination );
       // if (beatNumber % 16 === 0)    // beat 0 == low pitch
       //     osc.frequency.value = 880.0;
-      if (beatNumber % 4 === 0 )    // quarter notes = medium pitch
+      if (beatNumber % 4 === 0 ) {  // quarter notes = medium pitch
+        osc.frequency.value = 220.0;
+      }
+      else { // other 16th notes = high pitch
           osc.frequency.value = 220.0;
-      else                        // other 16th notes = high pitch
-          osc.frequency.value = 220.0;
-
+      }
       osc.start( time );
       osc.stop( time + this.noteLength );
     }
@@ -98,34 +94,32 @@ class Metro {
         if (this.isPlaying) { // start playing
             this.current16thNote = 0;
             this.nextNoteTime = this.audioContext.currentTime;
-            this.timerWorker.postMessage("start");
-            return "stop";
+            this.timerWorker.postMessage('start');
+            return 'stop';
         } else {
-            this.timerWorker.postMessage("stop");
-            return "play";
+            this.timerWorker.postMessage('stop');
+            return 'play';
         }
     }
 
     init() {
       let self = this;
-      this.timerWorker = new Worker("scripts/workers/metroworker.js");
+      this.timerWorker = new Worker('scripts/workers/metroworker.js');
 
       this.timerWorker.onmessage = function(event) {
-          if (event.data == "tick") {
-              // console.log("tick!");
-              self._scheduler();
+          if (event.data === 'tick') {
+            // console.log("tick!");
+            self._scheduler();
           }
-          else
-              console.log("message: " + event.data);
+          else {
+            console.log('message: ' + event.data);
+          }
       };
-      this.timerWorker.postMessage({"interval":this.lookahead});
+      this.timerWorker.postMessage({'interval':this.lookahead});
     }
 
     updateTempo(tempo) {
       this.tempo = tempo;
     }
 
-    isPlaying() {
-      return this.isPlaying;
-    }
 }
