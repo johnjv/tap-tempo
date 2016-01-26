@@ -46,6 +46,14 @@ gulp.task('jshint', () =>
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')))
 );
 
+// Lint JavaScript
+gulp.task('lint', () =>
+  gulp.src('app/scripts/**/*.js')
+    .pipe($.eslint())
+    .pipe($.eslint.format())
+    .pipe($.if(!browserSync.active, $.eslint.failOnError()))
+);
+
 // Optimize images
 gulp.task('images', () =>
   gulp.src('app/images/**/*')
