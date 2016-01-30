@@ -7,9 +7,7 @@ Thumbs.db
 _sandbox
 .sass-cache
 .DS_Store
-
 npm-debug.log
-
 .DS_Store
-
 firebase-debug.log
+firebase.json
