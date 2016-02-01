@@ -104,7 +104,7 @@ class Metronome {
 
     init() {
       let self = this;
-      this.timerWorker = new Worker('scripts/workers/metroworker.js');
+      this.timerWorker = new Worker('scripts/workers/metronomeworker.js');
 
       this.timerWorker.onmessage = function(event) {
           if (event.data === 'tick') {
