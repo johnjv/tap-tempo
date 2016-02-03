@@ -55,7 +55,7 @@ var timer = {
 			document.querySelector('.mdl-layout__content').classList.add('animate-reset');
 			document.querySelector('#reset-message').classList.remove('show');
 			document.querySelector('#bpm').textContent = '---';
-    }, 3000);
+    }, 2000);
   },
 
   stop: function() {
@@ -87,7 +87,7 @@ function updateView() {
 		m.updateTempo(bpm);
 		document.querySelector('#bpm').textContent = bpm;
 		document.querySelector('#bpm-time').textContent = bpm;
-		document.querySelector('#reset-message p ').textContent = 'to reset please wait 3 seconds';
+		document.querySelector('#reset-message p ').textContent = 'to reset please wait 2 seconds';
 	}
 	else if(tapTempo.taps.length == 0) {
 		document.querySelector('#bpm').textContent = '---';
