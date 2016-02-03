@@ -102,7 +102,3 @@ function updateView() {
 		document.querySelector('#reset-message p').textContent = 'tap once more';
 	}
 }
-
-function visualizeTap() {
-
-}
